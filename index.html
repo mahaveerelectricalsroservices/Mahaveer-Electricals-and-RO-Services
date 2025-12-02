@@ -1,0 +1,353 @@
+<!-- Save as index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mahaveer Electricals & RO Services</title>
+
+  <!-- Mobile-first CSS -->
+  <style>
+    :root{
+      --bg:#ffffff;
+      --muted:#6b7280;
+      --brand:#0077cc;
+      --brand-dark:#005fa3;
+      --card:#ffffff;
+      --accent:#25D366; /* whatsapp */
+    }
+    body.dark{
+      --bg:#0f1724;
+      --muted:#94a3b8;
+      --card:#0b1220;
+      --brand:#3399ff;
+      --brand-dark:#1a73e8;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:#0b1220;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      transition:background .25s, color .25s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Header */
+    header{
+      position:sticky; top:0; z-index:40;
+      display:flex; align-items:center; gap:12px;
+      justify-content:space-between;
+      padding:10px 14px;
+      background:linear-gradient(90deg,var(--brand),var(--brand-dark));
+      color:white;
+      box-shadow:0 6px 14px rgba(2,6,23,0.12);
+    }
+    header .left{display:flex; align-items:center; gap:10px}
+    header img.logo{height:44px; width:auto; border-radius:6px; background:rgba(255,255,255,0.06); padding:6px}
+    header h1{font-size:16px; margin:0; letter-spacing:0.2px}
+    header .nav-btn{font-size:14px; background:rgba(255,255,255,0.12); color:white; border:none; padding:8px 10px; border-radius:8px}
+
+    /* Main container */
+    main{padding:16px; max-width:720px; margin:0 auto}
+
+    /* Hero */
+    .hero{
+      margin-top:8px;
+      background:linear-gradient(180deg, rgba(0,119,204,0.12), rgba(0,119,204,0.04));
+      border-radius:12px; padding:18px;
+      display:flex; gap:12px; align-items:center;
+      animation:fadeIn .6s ease both;
+    }
+    .hero-left{flex:1}
+    .hero h2{font-size:20px; margin:0 0 6px 0; color:var(--brand)}
+    .hero p{margin:0; color:var(--muted); font-size:14px}
+
+    /* Buttons area (big tappable CTAs) */
+    .cta-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin-top:14px}
+    .cta{
+      background:var(--brand); color:white; text-align:center; padding:14px 8px; border-radius:10px;
+      font-weight:600; font-size:13px; text-decoration:none; display:flex; align-items:center; justify-content:center;
+      box-shadow:0 6px 12px rgba(3,102,192,0.12);
+    }
+    .cta.small{font-size:12px; padding:10px}
+
+    /* Cards / services */
+    .section{margin-top:18px}
+    .cards{display:grid; grid-template-columns:repeat(2,1fr); gap:10px}
+    .card{
+      background:var(--card); padding:12px; border-radius:10px;
+      box-shadow:0 6px 14px rgba(2,6,23,0.06); display:flex; gap:10px; align-items:center;
+    }
+    .card img{width:72px; height:72px; object-fit:cover; border-radius:8px}
+    .card h3{margin:0; font-size:15px; color:var(--brand)}
+    .card p{margin:6px 0 0 0; color:var(--muted); font-size:13px}
+
+    /* Product catalog (horizontal scroll on mobile) */
+    .catalog{display:flex; gap:10px; overflow-x:auto; padding:8px 2px}
+    .product{min-width:160px; background:var(--card); padding:10px; border-radius:10px; box-shadow:0 4px 10px rgba(2,6,23,0.06)}
+    .product img{width:100%; height:110px; object-fit:cover; border-radius:8px}
+    .product h4{font-size:14px; margin:8px 0 4px 0; color:var(--brand)}
+    .product p{font-size:13px; color:var(--muted); margin:0}
+
+    /* Reviews */
+    .reviews .r{background:var(--card); padding:12px; border-radius:10px; margin-bottom:10px; box-shadow:0 4px 10px rgba(2,6,23,0.06)}
+    .reviews .r p{font-size:13px; color:var(--muted)}
+
+    /* EMI block */
+    .emi{background:linear-gradient(90deg, rgba(3,102,192,0.06), rgba(3,102,192,0.02)); padding:12px; border-radius:10px; margin-top:12px}
+    .emi p{font-size:13px; color:var(--muted)}
+
+    /* Map */
+    .map{margin-top:12px; border-radius:10px; overflow:hidden; box-shadow:0 6px 14px rgba(2,6,23,0.08)}
+    .map iframe{width:100%; height:200px; border:0; display:block}
+
+    /* Contact form */
+    form{display:grid; gap:8px; margin-top:8px}
+    input, textarea, select{padding:12px; border-radius:8px; border:1px solid #e6e9ee; font-size:14px; background:transparent}
+    button[type="submit"]{background:var(--brand); color:white; padding:12px; border-radius:10px; border:0; font-weight:700}
+
+    /* Floating whatsapp */
+    .wh-float{
+      position:fixed; right:16px; bottom:16px; z-index:60;
+      background:var(--accent); width:56px; height:56px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center; box-shadow:0 8px 20px rgba(3,102,192,0.18);
+      border:4px solid white;
+    }
+    .wh-float img{width:28px; height:28px}
+
+    /* Footer */
+    footer{padding:18px; text-align:center; color:var(--muted); font-size:13px; margin-top:18px}
+
+    /* Responsive tweaks */
+    @media (min-width:720px){
+      main{padding:24px}
+      .cta-grid{grid-template-columns:repeat(4,1fr)}
+      .cards{grid-template-columns:repeat(3,1fr)}
+      .catalog{padding:12px}
+    }
+
+    @keyframes fadeIn{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none}}
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="left">
+      <!-- Use your uploaded logo file (rename to logo.png) -->
+      <img class="logo" src="logo.png" alt="Mahaveer Logo" />
+      <div style="display:flex;flex-direction:column;line-height:1">
+        <h1 style="font-size:14px;margin:0">Mahaveer Electricals</h1>
+        <small style="color:rgba(255,255,255,0.92)">RO Services • Installation • AMC</small>
+      </div>
+    </div>
+
+    <div style="display:flex; align-items:center; gap:8px">
+      <button id="toggleDark" class="nav-btn" aria-label="toggle dark">Dark</button>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-left">
+        <h2>Fast RO Service • Genuine Parts</h2>
+        <p>Book installation, service, or buy a new RO. WhatsApp-first experience for quick confirmations.</p>
+
+        <!-- Big CTAs -->
+        <div class="cta-grid" style="margin-top:12px">
+          <!-- each button opens WhatsApp with a pre-filled message -->
+          <a class="cta" href="#" data-msg="I%20want%20RO%20Installation%20-%20Please%20confirm%20availability">RO Installation</a>
+          <a class="cta" href="#" data-msg="I%20want%20to%20Buy%20a%20New%20RO%20-%20Please%20share%20price%20list">Buy New RO</a>
+          <a class="cta" href="#" data-msg="I%20need%20RO%20Service%20-%20Please%20book%20a%20technician">Service / Repair</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="section">
+      <h3 style="text-align:left;color:var(--brand);margin:0 0 8px 6px">Popular Services</h3>
+      <div class="cards">
+        <div class="card">
+          <img src="install.jpg" alt="Install" />
+          <div>
+            <h3>Installation</h3>
+            <p>Professional setup & testing for all RO models.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="service.jpg" alt="Service" />
+          <div>
+            <h3>General Service</h3>
+            <p>Deep clean, filter check & water test.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="filter.jpg" alt="Filter" />
+          <div>
+            <h3>Filter Change</h3>
+            <p>Original filters with warranty.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="repair.jpg" alt="Repair" />
+          <div>
+            <h3>Repair</h3>
+            <p>Motor, leakage, low flow & more.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Catalog -->
+    <section id="catalog" class="section">
+      <h3 style="text-align:left;color:var(--brand);margin:0 0 8px 6px">Product Catalog</h3>
+      <div class="catalog" aria-label="products">
+        <div class="product">
+          <img src="ro1.jpg" alt="RO model 1" />
+          <h4>PUREMAX RO</h4>
+          <p>₹6,999</p>
+          <a class="cta small" href="#" data-msg="I%20am%20interested%20in%20PUREMAX%20RO%20-%20Please%20share%20details">Buy</a>
+        </div>
+        <div class="product">
+          <img src="ro2.jpg" alt="RO model 2" />
+          <h4>AQUA BLUE</h4>
+          <p>₹7,499</p>
+          <a class="cta small" href="#" data-msg="I%20am%20interested%20in%20AQUA%20BLUE%20-%20Please%20share%20details">Buy</a>
+        </div>
+        <div class="product">
+          <img src="ro3.jpg" alt="RO model 3" />
+          <h4>ULTRA RO</h4>
+          <p>₹8,999</p>
+          <a class="cta small" href="#" data-msg="I%20am%20interested%20in%20ULTRA%20RO%20-%20Please%20share%20details">Buy</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews -->
+    <section id="reviews" class="section reviews">
+      <h3 style="text-align:left;color:var(--brand);margin:0 0 8px 6px">Customer Reviews</h3>
+      <div class="reviews">
+        <div class="r"><strong>Rahul</strong> <div style="color:var(--muted);font-size:13px">⭐⭐⭐⭐⭐</div><p>Fast and professional. Technician arrived on time and fixed the issue.</p></div>
+        <div class="r"><strong>Kavita</strong> <div style="color:var(--muted);font-size:13px">⭐⭐⭐⭐⭐</div><p>Good prices and genuine parts. Highly recommended.</p></div>
+      </div>
+    </section>
+
+    <!-- EMI -->
+    <section id="emi" class="section emi">
+      <h3 style="text-align:left;color:var(--brand);margin:0 0 8px 6px">Easy EMI & Offers</h3>
+      <p>EMI available on all models • Aadhaar + PAN • 0% Down payment offers available (T&C)</p>
+    </section>
+
+    <!-- Map -->
+    <section class="section map">
+      <h3 style="text-align:left;color:var(--brand);margin:0 0 8px 6px">Find Us</h3>
+      <!-- Edit the Google Maps q parameter to your exact address -->
+      <iframe src="https://maps.google.com/maps?q=Peer%20Baba%20Road%20Near%20Peer%20Baba&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe>
+    </section>
+
+    <!-- Contact (form opens WhatsApp with filled details) -->
+    <section id="contact" class="section">
+      <h3 style="text-align:left;color:var(--brand);margin:0 0 8px 6px">Contact / Quick Booking</h3>
+
+      <form id="contactForm">
+        <input id="name" name="name" type="text" placeholder="Your name" required />
+        <input id="phone" name="phone" type="tel" placeholder="Phone (required)" pattern="[0-9]{10}" required />
+        <select id="serviceSelect" required>
+          <option value="">Select service</option>
+          <option>RO Installation</option>
+          <option>Service / Repair</option>
+          <option>Filter Change</option>
+          <option>Buy New RO</option>
+        </select>
+        <input id="addr" name="address" type="text" placeholder="Address / Landmark" />
+        <textarea id="note" name="note" placeholder="Brief problem / message (optional)"></textarea>
+        <button type="submit">Send via WhatsApp</button>
+      </form>
+
+      <small style="display:block; margin-top:8px; color:var(--muted)">We open WhatsApp with your details so you can confirm booking.</small>
+    </section>
+
+    <footer>
+      © 2025 Mahaveer Electricals & RO Services — Peer Baba Road • Call/WhatsApp: 9717485713
+    </footer>
+  </main>
+
+  <!-- Floating WhatsApp -->
+  <a class="wh-float" id="whFloat" title="Chat on WhatsApp" href="https://wa.me/919717485713?text=Hi%20I%20need%20help" aria-label="WhatsApp">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="whatsapp">
+  </a>
+
+  <!-- Lightweight JS -->
+  <script>
+    // Config
+    const PHONE = '919717485713'; // your number incl country code
+    // Helper to open WhatsApp prefilled
+    function openWhatsApp(message){
+      const url = 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent(message);
+      window.location.href = url;
+    }
+
+    // CTAs auto-reply behavior
+    document.querySelectorAll('.cta[data-msg]').forEach(btn=>{
+      btn.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const msg = btn.getAttribute('data-msg') || 'Hello';
+        openWhatsApp(msg + ' (via mobile site)');
+      });
+    });
+
+    // Product buy buttons
+    document.querySelectorAll('.product .cta').forEach(b=>{
+      b.addEventListener('click', e=>{
+        e.preventDefault();
+        const msg = b.getAttribute('data-msg') || 'Interested';
+        openWhatsApp(msg + ' (product inquiry)');
+      });
+    });
+
+    // Contact form: send form values to WhatsApp (no backend)
+    document.getElementById('contactForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const service = document.getElementById('serviceSelect').value;
+      const addr = document.getElementById('addr').value.trim();
+      const note = document.getElementById('note').value.trim();
+      if(!phone){ alert('Please enter phone number'); return; }
+      let msg = `Hi, I want to book a service.%0AName: ${name}%0APhone: ${phone}%0AService: ${service}%0AAddress: ${addr}%0ADetails: ${note}`;
+      // open WhatsApp with message
+      window.location.href = 'https://wa.me/' + PHONE + '?text=' + msg;
+    });
+
+    // Dark mode toggle (persist)
+    const btn = document.getElementById('toggleDark');
+    const stored = localStorage.getItem('site-dark');
+    if(stored === '1'){ document.body.classList.add('dark'); btn.textContent = 'Light' }
+    btn.addEventListener('click', ()=>{
+      document.body.classList.toggle('dark');
+      const isDark = document.body.classList.contains('dark');
+      localStorage.setItem('site-dark', isDark ? '1' : '0');
+      btn.textContent = isDark ? 'Light' : 'Dark';
+    });
+
+    // Make the floating whatsapp open a small menu if user long-press? (kept simple)
+    document.getElementById('whFloat').addEventListener('click', (e)=>{
+      // (fallback) will open configured whatsapp link
+    });
+
+    // Accessibility: enlarge clickable areas on iOS
+    document.querySelectorAll('.cta, .wh-float, button').forEach(el=>{
+      el.style.touchAction = 'manipulation';
+    });
+  </script>
+</body>
+</html>
